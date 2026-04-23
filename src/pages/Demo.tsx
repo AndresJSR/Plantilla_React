@@ -1,40 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from 'react';
 const Demo: React.FC = () => {
-    //Aquí es la lógica
-    let [name, setName] = useState("Felipe")
-    let colores=["rojo","verde","azul"];
-    let flag = true;
-    useEffect(() => {
-        console.log("Se montó el componente");
-        //Llamar a backend solicitando información
-    }, []);
+  //Aquí es la lógica
 
+  let [name, setName] = useState<string>('Felipe');
+  let age: number = 30;
+  let isStudent: boolean = true;
+  let hobbies: string[] = ['Reading', 'Traveling', 'Cooking'];
+  let person: { name: string; age: number } = { name: 'Felipe', age: 30 };
 
+  const sumar = (a: number, b: number) => {
+    return a + b;
+  };
 
-    // Función para manejar los cambios en la caja de texto
-    const manejarCambio = (event: any) => {
-        setName(event.target.value); // Actualizar el estado con el valor del input
-    };
-
-    //Es el html
-    return <div>
-        <h1>Hello World {name}</h1>
-        {   flag? 
-                <h2>Flag es verdadero</h2>
-            :
-                <h2>Flag es falso</h2>
-        }
-        <input
-            type="text"
-            value={name} // El valor del input está ligado al estado 'texto'
-            onChange={manejarCambio} // Se actualiza el estado cada vez que el usuario escribe
-        />
-        <ul>
-            {colores.map((color) => (
-                <li>{color}</li>
-            ))}
-        </ul>
+  //Aquí es el renderizado
+  return (
+    <div>
+      <h1>Hola mundo mi querid@ {name}</h1>
+      <p>Usted tiene {age} años.</p>
+      <p>Usted es {age >= 18 ? 'mayor' : 'menor'} de edad</p>
+      <p>Sus hobbies son:</p>
+      <ul>
+        {hobbies.map((hobby, index) => (
+          <li key={index}>{hobby}</li>
+        ))}
+      </ul>
+      <input
+        type="text"
+        // cambio en la etiqueta (vista)
+        value={name}
+        // cambio en la variable del controlador
+        onChange={(e) => setName(e.target.value)}
+      />
     </div>
-        ;
-}
+  );
+};
 export default Demo;
